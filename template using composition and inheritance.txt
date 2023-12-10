@@ -1,0 +1,202 @@
+#include <iostream>
+using namespace std;
+
+template<class t>
+class square
+{
+private:
+	t len;
+public:
+	square(t = 0);
+	void setL(t);
+	t getL();
+	t area();
+};
+template<class t>
+square<t>::square(t l)
+{
+	len = l;
+}
+template<class t>
+void square<t>::setL(t l)
+{
+	len = l;
+}
+template<class t>
+t square<t>::getL()
+{
+	return len;
+}
+template<class t>
+t square<t>::area()
+{
+	return (len * len);
+}
+
+//--------------------------------
+// composition
+
+
+template<class t>
+class box
+{
+private:
+	t height;
+	square<t> s;
+public:
+	box(t = 0, t = 0);
+	void setH(t);
+	void display();
+	t getH();
+	void setLen(t);
+	t volume();
+};
+template<class t>
+box<t>::box(t h, t l)
+{
+	height = h; 
+	s.setL(l);
+}
+template<class t>
+void box<t>::setH(t h)
+{
+	height = h;
+}
+template<class t>
+void box<t>::setLen(t l)
+{
+	s.setL(l);
+}
+template<class t>
+t box<t>::getH()
+{
+	return height;
+}
+template<class t>
+t box<t>::volume()
+{
+	return (s.area() * height);
+}
+template <class t>
+void box<t>::display()
+{
+	cout << " Length: " << s.getL() << endl;
+	cout << " Height: " << height << endl;
+}
+
+int main()
+{
+	box <int> b;
+
+	int l, h;
+	cout << " Enter length: ";
+	cin >> l;
+	cout << " Enter height: ";
+	cin >> h;
+
+	b.setLen(l); b.setH(h);
+
+	b.display();
+	cout << " Volume of box: " << b.volume() << endl;
+
+	return 0;
+}
+
+
+---------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+template<class t>
+class square
+{
+private:
+	t len;
+public:
+	square(t = 0);
+	void setL(t);
+	t getL();
+	t Area();
+};
+template<class t>
+square<t>::square(t l)
+{
+	len = l;
+}
+template<class t>
+void square<t>::setL(t l)
+{
+	len = l;
+}
+template<class t>
+t square<t>::getL()
+{
+	return len;
+}
+template<class t>
+t square<t>::Area()
+{
+	return (len * len);
+}
+
+//-------------------------------
+// Inheritance
+
+template<class t>
+class box :public square<t>
+{
+private:
+	t height;
+public:
+	box(t = 0, t = 0);
+	void setH(t);
+	t getH();
+	void display();
+	t volume();
+};
+template<class t>
+box<t>::box(t h, t l)
+{
+	height = h;
+	setL(l);
+}
+template<class t>
+void box<t>::setH(t h)
+{
+	height = h;
+}
+template<class t>
+t box<t>::getH()
+{
+	return height;
+}
+template<class t>
+void box<t>::display()
+{
+	cout << " Length: " << getL() << endl;
+	cout << " Height: " << height << endl;
+}
+template<class t>
+t box<t>::volume()
+{
+	return (Area() * height);
+}
+
+int main()
+{
+	box <int> b;
+
+	int l, h;
+	cout << " Enter length: ";
+	cin >> l;
+	cout << " Enter height: ";
+	cin >> h;
+
+	b.setL(l); b.setH(h);
+
+	b.display();
+	cout << " Volume of box: " << b.volume() << endl;
+
+	return 0;
+}

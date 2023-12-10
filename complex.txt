@@ -1,0 +1,180 @@
+#include <iostream>
+using namespace std;
+
+template<class t>
+class complex
+{
+private:
+	t real;
+	t imag;
+public:
+	complex(t = 0, t = 0);
+	void setR(t);
+	void setI(t);
+	t getR();
+	t getI();
+	void display()
+	{
+		cout << " ( " << getR() << " , " << getI() << " ) " << endl;
+		cout << " " << getR() << " + ( " << getI() << "i )" << endl;
+	}
+	void input()
+	{
+		t r = 0, i = 0;
+
+		cout << " Enter real part: ";
+		cin >> r;
+		cout << " Enter Imaginary part: ";
+		cin >> i;
+
+		setR(r); setI(i);
+	}
+	/*friend istream& operator>>(istream&, complex<t>&);
+	friend ostream& operator<<(ostream&, complex<t>&);*/
+
+	void add(t, t);
+};
+template<class t>
+complex<t>::complex(t r, t i)
+{
+	real = r; imag = i;
+}
+template<class t>
+void complex<t>::setI(t i)
+{
+	imag = i;
+}
+template<class t>
+void complex<t>::setR(t r)
+{
+	real = r;
+}
+template<class t>
+t complex<t>::getI()
+{
+	return imag;
+}
+template<class t>
+t complex<t>::getR()
+{
+	return real;
+}
+template<class t>
+void complex<t>::add(t r, t i)
+{
+	real = real + r;
+	imag = imag + i;
+}
+
+//template<class t>
+//istream& operator>>(istream& in, complex<t>& c)
+//{
+//	t r = 0, i = 0;
+//
+//	cout << " Enter real part: ";
+//	in >> r;
+//	cout << " Enter Imaginary part: ";
+//	in >> i;
+//
+//	c.setR(r); c.setI(i);
+//
+//	return in;
+//}
+//template<class t>
+//ostream& operator<<(ostream& out, complex<t>& c)
+//{
+//	out << " ( " << c.getR() << " , " << c.getI() << " ) " << endl;
+//	out << c.getR() << " + ( " << c.getI() << " )" << endl;
+//
+//	return out;
+//}
+
+int main()
+{
+	complex<int> c;
+
+	c.input();
+	int r, i;
+
+	cout << " Enter the amount you want to add... " << endl;
+	cout << " In real part: ";
+	cin >> r;
+	cout << " In imaginary part: ";
+	cin >> i;
+
+	c.add(r, i);
+
+	c.display();
+
+	return 0;
+}
+
+-------------------------------------------------------------------------
+
+
+#include <iostream>
+using namespace std;
+
+template<class t, class t1>
+class simple1
+{
+private:
+	t num;
+	t1 ch;
+public:
+	simple1(t = 0, t1 = '-');
+	void input(t, t1);
+	void display();
+};
+
+template<class t, class t1>
+simple1<t, t1>::simple1(t n, t1 c)
+{
+	num = n; ch = c;
+}
+
+template<class t, class t1>
+void simple1<t, t1>::input(t n, t1 c)
+{
+	num = n; ch = c;
+}
+
+template<class t, class t1>
+void simple1<t, t1>::display()
+{
+	cout << " Num: " << num << endl;
+	cout << " Character: " << ch << endl;
+}
+
+
+template<class t, class t1, class t2>
+void show(t n, t1 c, t2 d)
+{
+	cout << " Number: " << n << endl;
+	cout << " Character: " << c << endl;
+	cout << " Double num: " << d << endl;
+}
+int main()
+{
+	simple1<int, char> s(1, 'c');
+	s.display();
+
+
+	int n;
+	char c;
+	cout << " Enter number: ";
+	cin >> n;
+	cout << " Enter character: ";
+	cin >> c;
+
+	s.input(n, c);
+	s.display();
+
+
+	double d;
+	cin >> d;
+
+	show<int, char, double>(n, c, d);
+
+	return 0;
+}

@@ -1,0 +1,145 @@
+#include <iostream>
+using namespace std;
+
+template<typename t>
+class square
+{
+private:
+	t l;
+public:
+	square(t = 0);
+	void setL(t);
+	t getL();
+	t area();
+};
+
+template<typename t>
+square<t>::square(t len)
+{
+	l = len;
+}
+template<class t>
+void square<t>::setL(t len)
+{
+	l = len;
+}
+template<class t>
+t square<t>::getL()
+{
+	return l;
+}
+template<typename t>
+t square<t>::area()
+{
+	return l * l;
+}
+
+int main()
+{
+	square<int> s(5);
+	square<double> s1;
+
+	cout << s.area() << endl;
+
+	s1.setL(9.8);
+
+	cout << s1.area() << endl;
+
+	return 0;
+}
+
+------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+template<typename t>
+class matrix
+{
+private:
+	int r;
+	int c;
+	t** arr;
+public:
+	matrix(int = 2, int = 2);
+	void setIndex(int, int, t);
+	t getIndex(int, int);
+	t** transpose();
+};
+template<class t>
+matrix<t>::matrix(int rows, int cols)
+{
+	r = rows; c = cols;
+
+	arr = new t*[r];
+	for (int i = 0; i < r; i++)
+	{
+		arr[i] = new t[c];
+	}
+}
+template<class t>
+void matrix<t>::setIndex(int rows, int cols, t n)
+{
+	arr[rows][cols] = n;
+}
+template<class t>
+t matrix<t>::getIndex(int rows, int cols)
+{
+	return arr[rows][cols];
+}
+template<class t>
+t** matrix<t>::transpose()
+{
+	t** array;
+	array = new t * [c];
+	for (int i = 0; i < c; i++)
+		array[i] = new t[r];
+
+
+	for (int i = 0; i < c; i++)
+		for (int j = 0; j < r; j++)
+			array[i][j] = arr[j][i];
+
+	return array;
+}
+
+
+int main()
+{
+	matrix<int> m(2, 3);
+	int a;
+
+	for (int i = 0; i < 2; i++)
+	{
+		cout << " Enter for row " << i + 1 << endl;
+		for (int j = 0; j < 3; j++)
+		{
+			cin >> a;
+			m.setIndex(i, j, a);
+		}
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cout << m.getIndex(i, j) << " ";
+		}
+		cout << endl;
+	}
+
+	int** arr;
+
+	arr = m.transpose();
+	cout << "\n Displaying transpose: " << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			cout << arr[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
